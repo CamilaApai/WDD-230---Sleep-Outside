@@ -1,0 +1,9 @@
+[
+  {
+    "AlertName": "Test",
+    "AlertMessage": "This is only a test",
+    "Background": "darkblue",
+    "Color": "white"
+  },
+  {}
+]
