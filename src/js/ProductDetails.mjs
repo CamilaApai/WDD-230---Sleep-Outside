@@ -39,11 +39,14 @@ function productTemplate(data) {
 
     <h2 class="divider">${data.NameWithoutBrand}</h2>
 
-    <img
-      class="divider"
-      src="${data.Images.PrimaryLarge}"
-      alt="${data.NameWithoutBrand}"
-    />
+    <picture>
+        <source srcset="${data.Images.PrimaryLarge}" media="(max-width: 500px)">
+        <img
+        class="divider"
+        src="${data.Images.PrimaryExtraLarge}"
+        alt="${data.NameWithoutBrand}"
+        />
+    </picture>
 
     <p class="product-card__price">$${data.FinalPrice}</p>
 
