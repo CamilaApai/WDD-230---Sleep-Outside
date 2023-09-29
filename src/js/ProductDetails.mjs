@@ -1,3 +1,4 @@
+import { setLocalStorage } from "./utils.mjs";
 
 export default class ProductDetails {
     constructor(productId, dataSource) {
@@ -15,6 +16,10 @@ export default class ProductDetails {
 
         document.getElementById('addToCart')
             .addEventListener('click', this.addToCart.bind(this));
+
+
+        let title = this.product.NameWithoutBrand.charAt().toUpperCase() + this.product.NameWithoutBrand.slice(1);
+        document.querySelector("title").textContent += title;
     }
 
     addToCart(product) {
@@ -22,8 +27,8 @@ export default class ProductDetails {
     }
 
     renderProductDetails(data) {
-        document.querySelector(".divider").innerHTML = "";
-        document.querySelector(".divider").innerHTML = productTemplate(data);
+        document.querySelector("main.divider").innerHTML = "";
+        document.querySelector("main.divider").innerHTML = productTemplate(data);
     }
 
 }
@@ -36,11 +41,11 @@ function productTemplate(data) {
 
     <img
       class="divider"
-      src="${data.Image}"
+      src="${data.Images.PrimaryLarge}"
       alt="${data.NameWithoutBrand}"
     />
 
-    <p class="product-card__price">${data.FinalPrice}</p>
+    <p class="product-card__price">$${data.FinalPrice}</p>
 
     <p class="product__color">${data.Colors[0].ColorName}</p>
 
