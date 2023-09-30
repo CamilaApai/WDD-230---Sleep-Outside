@@ -12,6 +12,7 @@ export function getLocalStorage(key) {
 
 // save data to local storage
 export function setLocalStorage(key, data) {
+  updateCartCount();
   let dataArray = getLocalStorage(key) || [];
   dataArray.push(data);
   localStorage.setItem(key, JSON.stringify(dataArray));
@@ -63,4 +64,12 @@ export async function loadHeaderFooter() {
 
   renderWithTemplate(headerTemplate, headerElement)
   renderWithTemplate(footerTemplate, footerElement)
+}
+
+export function updateCartCount() {
+  var cartCountElement = document.getElementById('cartCount');
+  var cartItemCount = parseInt(cartCountElement.textContent) + 1
+  if (cartCountElement) {
+    cartCountElement.textContent = cartItemCount.toString();
+  }
 }
