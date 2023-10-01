@@ -18,8 +18,14 @@ export default class ProductDetails {
     }
 
     addToCart(product) {
-        setLocalStorage("so-cart", product);
-    }
+        let cartContents = getLocalStorage("so-cart");
+        //check to see if there was anything there
+        if (!cartContents) {
+          cartContents = [];
+        }
+        // then add the current product to the list
+        cartContents.push(this.product);
+        setLocalStorage("so-cart", cartContents);    }
 
     renderProductDetails(data) {
         document.querySelector(".divider").innerHTML = "";
@@ -36,7 +42,7 @@ function productTemplate(data) {
 
     <img
       class="divider"
-      src="${data.Image}"
+      src="${data.Images.PrimaryLarge}"
       alt="${data.NameWithoutBrand}"
     />
 
