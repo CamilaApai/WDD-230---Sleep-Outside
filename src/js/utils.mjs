@@ -64,3 +64,12 @@ export async function loadHeaderFooter() {
   renderWithTemplate(headerTemplate, headerElement)
   renderWithTemplate(footerTemplate, footerElement)
 }
+
+export async function productDiscount() {
+  
+  const priceElement = document.querySelector(".product-card__price");
+  priceElement.classList.toggle("discounted");
+
+  // Update the text content of the discount indicator
+  // discountAmountElement.textContent = "$" + discountAmount.toFixed(0);
+}

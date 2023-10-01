@@ -202,12 +202,16 @@ button {
   grid-column: 3;
 }
 /* discount indicator */
-.discount {
+.discount-percent {
   font-size: 18px;
   color: #ff5733; /* Color for the discount text */
 }
+.discounted {
+  text-decoration: line-through;
+  color: red;
+}
 
-.discount-indicator {
+.discount-div {
   background-color: #e74c3c; /* Red color for discount indicator */
   color: white;
   padding: 5px 10px;
