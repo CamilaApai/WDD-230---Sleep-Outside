@@ -62,6 +62,13 @@ export async function loadHeaderFooter() {
 
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
+
+  updateCartCount();
+}
+
+export function updateCartCount() {
+  const cartCount = getLocalStorage("so-cart")?.length ?? 0;
+  document.querySelector(".cart-count").textContent = cartCount;
 }
 
 // set a listener for both touchend and click

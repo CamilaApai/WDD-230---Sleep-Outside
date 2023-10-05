@@ -1,4 +1,4 @@
-import { setLocalStorage, getLocalStorage } from "./utils.mjs";
+import { setLocalStorage, getLocalStorage, updateCartCount } from "./utils.mjs";
 
 function productDetailsTemplate(product) {
   return `<section class="product-detail"> <h3>${product.Brand.Name}</h3>
@@ -38,19 +38,14 @@ export default class ProductDetails {
     //check to see if there was anything there
     if (!cartContents) {
       cartContents = [];
-    }
-
-    UpdateCartCount();
+    }    
     // then add the current product to the list
     cartContents.push(this.product);
     setLocalStorage("so-cart", cartContents);
+    updateCartCount();
   }
   renderProductDetails(selector) {
     const element = document.querySelector(selector);
     element.insertAdjacentHTML("afterBegin", productDetailsTemplate(this.product));
   }
-}
-
-function UpdateCartCount() {
-  console.log("Update Method");
 }
