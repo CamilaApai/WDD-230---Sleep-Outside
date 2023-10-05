@@ -252,6 +252,26 @@ button {
   grid-row: 2;
   grid-column: 3;
 }
+/* discount indicator */
+.discount {
+  font-size: 18px;
+  color: #ff5733; /* Color for the discount text */
+}
+
+.discount-indicator {
+  background-color: #e74c3c; /* Red color for discount indicator */
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  border-image-width: auto;
+  width: 4rem;
+}
+
+.discount-amount {
+  font-weight: bold;
+}
+/* End discount indicator */
 
 @media screen and (min-width: 500px) {
   body {
