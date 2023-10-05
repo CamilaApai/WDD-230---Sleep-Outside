@@ -1,4 +1,4 @@
-import { setLocalStorage, getParams } from "./utils.mjs";
+import { setLocalStorage, getParams, loadHeaderFooter } from "./utils.mjs";
 import ProductData from "./ProductData.mjs";
 import ProductDetails from "./ProductDetails.mjs";
 
@@ -7,22 +7,17 @@ const productId = getParams("product");
 
 const product = new ProductDetails(productId, dataSource);
 product.init();
+loadHeaderFooter();
 
-function addProductToCart(addProduct) {
-  setLocalStorage("so-cart", addProduct);
-}
-// add to cart button event handler
-async function addToCartHandler(e) {
-  const cartProduct = await dataSource.findProductById(e.target.dataset.id);
-  addProductToCart(cartProduct);
-}
 
-// add listener to Add to Cart button
-document
-  .getElementById("addToCart")
-  .addEventListener("click", addToCartHandler);
+
+
+
+
+
 
 // discount indicator
+/*
 document.addEventListener("DOMContentLoaded", function () {
   const priceElement = document.querySelector(".product-card__price");
   const discountElement = document.querySelector(".discount");
@@ -42,3 +37,4 @@ document.addEventListener("DOMContentLoaded", function () {
   // Update the text content of the discount indicator
   discountAmountElement.textContent = "$" + discountAmount.toFixed(0);
 });
+*/

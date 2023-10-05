@@ -1,3 +1,5 @@
+import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+
 
 export default class ProductDetails {
     constructor(productId, dataSource) {
@@ -17,7 +19,7 @@ export default class ProductDetails {
             .addEventListener('click', this.addToCart.bind(this));
     }
 
-    addToCart(product) {
+    addToCart() {
         let cartContents = getLocalStorage("so-cart");
         //check to see if there was anything there
         if (!cartContents) {
@@ -25,7 +27,8 @@ export default class ProductDetails {
         }
         // then add the current product to the list
         cartContents.push(this.product);
-        setLocalStorage("so-cart", cartContents);    }
+        setLocalStorage("so-cart", cartContents);    
+      }
 
     renderProductDetails(data) {
         document.querySelector(".divider").innerHTML = "";
