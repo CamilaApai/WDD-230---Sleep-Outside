@@ -61,4 +61,11 @@ export async function loadHeaderFooter() {
 
   renderWithTemplate(headerTemplate, headerElement)
   renderWithTemplate(footerTemplate, footerElement)
+
+  updateCountDisplay();
+}
+
+export function updateCountDisplay() {
+  let amountInCart = getLocalStorage("so-cart").length;
+  document.getElementById("cart-count").textContent = amountInCart > 0 ? amountInCart : 0;
 }
