@@ -118,6 +118,17 @@ button {
   text-align: center;
 }
 
+#cart-count {
+  position: absolute;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 50%;
+  padding: 4px 6px;
+  font-size: 10px;
+  top: 8px;
+  right: -8px;
+}
+
 .cart svg {
   width: 25px;
 }
