@@ -19,11 +19,11 @@ export default class ProductDetails {
 
   addToCart() {
     let cartContents = getLocalStorage("so-cart");
-    //check to see if there was anything there
-    if (!cartContents) {
+    // Check to see if there was anything there or if it's not an array
+    if (!cartContents || !Array.isArray(cartContents)) {
       cartContents = [];
     }
-    // then add the current product to the list
+    // Then add the current product to the list
     cartContents.push(this.product);
     setLocalStorage("so-cart", cartContents);
     updateCountDisplay();

@@ -29,4 +29,10 @@ export default class ShoppingCart {
     const htmlItems = cartItems.map((item) => cartItemTemplate(item));
     document.querySelector(this.parentSelector).innerHTML = htmlItems.join("");
   }
+  getCartItems() {
+    const cartContents = JSON.parse(localStorage.getItem(this.key)) || [];
+    return cartContents;
+  }
 }
+
+
