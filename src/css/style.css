@@ -30,6 +30,45 @@ header {
   justify-content: space-between;
   padding: 0 10px;
 }
+/* search button */
+
+.nav-search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-box {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#search-form {
+  display: flex;
+}
+
+input[type="text"] {
+  width: 70%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 25px 0 0 25px;
+}
+
+.search-button {
+  padding: 10px 20px;
+  background-color: var(--dark-grey);
+  color: #fff;
+  border: none;
+  border-radius: 0 25px 25px 0;
+  cursor: pointer;
+}
+
+#product-list {
+  margin-top: 20px;
+}
+
+
+/* end search button */
 .logo {
   line-height: 60px;
   width: 245px;
