@@ -1,44 +1,55 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, setClick } from "./utils.mjs";
 
 
 export default class ProductDetails {
-    constructor(productId, dataSource) {
-        this.productId = productId;
-        this.product = {};
-        this.dataSource = dataSource;
-    }
-    async init() {
-        // use our datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
-        // once we have the product details we can render out the HTML
-        // once the HTML is rendered we can add a listener to Add to Cart button
-        // Notice the .bind(this). Our callback will not work if we don't include that line. Review the readings from this week on 'this' to understand why.
-        this.product = await this.dataSource.findProductById(this.productId);
-        this.renderProductDetails(this.product)
+  constructor(productId, dataSource) {
+    this.productId = productId;
+    this.product = {};
+    this.dataSource = dataSource;
+  }
+  async init() {
+    // use our datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
+    // once we have the product details we can render out the HTML
+    // once the HTML is rendered we can add a listener to Add to Cart button
+    // Notice the .bind(this). Our callback will not work if we don't include that line. Review the readings from this week on 'this' to understand why.
+    this.product = await this.dataSource.findProductById(this.productId);
+    this.renderProductDetails(this.product)
 
-        document.getElementById('addToCart')
-            .addEventListener('click', this.addToCart.bind(this));
-    }
+    document.getElementById('addToCart')
+      .addEventListener('click', this.addToCart.bind(this));
 
-    addToCart() {
-        let cartContents = getLocalStorage("so-cart");
-        //check to see if there was anything there
-        if (!cartContents) {
-          cartContents = [];
-        }
-        // then add the current product to the list
-        cartContents.push(this.product);
-        setLocalStorage("so-cart", cartContents);    
-      }
+    setClick("#addToCart", () => {
+      document.querySelector(".img").setAttribute("class", "addBackpack");
+      setTimeout(() => {
+        document.querySelector(".addBackpack").setAttribute("class", "img");
+      }, "1000");
+    });
 
-    renderProductDetails(data) {
-        document.querySelector(".divider").innerHTML = "";
-        document.querySelector(".divider").innerHTML = productTemplate(data);
+    let title = this.product.NameWithoutBrand.charAt().toUpperCase() + this.product.NameWithoutBrand.slice(1);
+    document.querySelector("title").textContent += title;
+
+  }
+
+  addToCart() {
+    let cartContents = getLocalStorage("so-cart");
+    //check to see if there was anything there
+    if (!cartContents) {
+      cartContents = [];
     }
+    // then add the current product to the list
+    cartContents.push(this.product);
+    setLocalStorage("so-cart", cartContents);
+  }
+
+  renderProductDetails(data) {
+    document.querySelector("main.divider").innerHTML = "";
+    document.querySelector("main.divider").innerHTML = productTemplate(data);
+  }
 
 }
 
 function productTemplate(data) {
-    return `<section class="product-detail">
+  return `<section class="product-detail">
     <h3>${data.Brand.Name}</h3>
 
     <h2 class="divider">${data.NameWithoutBrand}</h2>
