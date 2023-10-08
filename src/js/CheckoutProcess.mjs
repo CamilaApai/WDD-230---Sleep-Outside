@@ -48,8 +48,10 @@ export default class CheckoutProcess {
         const numItems = document.getElementById("num-items");
 
         numItems.innerText = this.list.length;
-        const amount = this.list.map((item) => item.FinalPrice );
-        this.itemTotal = amount.reduce((total, item) => total + item);
+
+        const totalAmount = this.list.map((item) => item.FinalPrice * item.Quantity);
+        this.itemTotal = totalAmount.reduce((sum, item) => sum + item);
+
         cartTotal.innerText = "$" + this.itemTotal;
     }
   

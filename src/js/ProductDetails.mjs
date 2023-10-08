@@ -26,7 +26,15 @@ export default class ProductDetails {
           cartContents = [];
         }
         // then add the current product to the list
-        cartContents.push(this.product);
+        const exists = cartContents.some((item) => item.Id === this.product.Id) 
+        if (exists) {
+          const itemWithId = cartContents.find((item) => item.Id === this.product.Id);
+          itemWithId.Quantity++;
+        }
+        else {
+          this.product.Quantity = 1;
+          cartContents.push(this.product);
+        }
         setLocalStorage("so-cart", cartContents);    
       }
 
