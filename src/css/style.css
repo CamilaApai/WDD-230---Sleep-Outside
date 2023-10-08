@@ -315,6 +315,11 @@ button {
   grid-column: 3;
 }
 
+
+.remove-item {
+  color: red;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
