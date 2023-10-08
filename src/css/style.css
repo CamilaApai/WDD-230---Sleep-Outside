@@ -126,6 +126,25 @@ button {
   fill: gray;
 }
 
+@keyframes addBackpack {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.5);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.addBackpack {
+  animation-name: addBackpack;
+  animation-duration: 1s;
+}
+
 /* End cart icon styles */
 
 /* Main category icons */
