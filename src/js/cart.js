@@ -5,22 +5,21 @@ loadHeaderFooter();
 
 const cart = new ShoppingCart("so-cart", ".product-list");
 cart.init();
+
 if (cart.total > 0) {
-  // show our checkout button and total if there are items in the cart.
   document.querySelector(".cart-footer").classList.remove("hide");
-}const cartItems = cart.getCartItems();
+}
+
+const cartItems = cart.getCartItems();
 const totalElement = document.querySelector(".list-total");    
 let total = 0;
 
 // Total$ in Cart
 if (cartItems.length > 0) {
-
     for (const item of cartItems) {
       total += item.FinalPrice;
     }
-
     totalElement.innerHTML = `Total: $${total.toFixed(2)}`;
-
 } else {
     totalElement.style.display = "none";
   }
