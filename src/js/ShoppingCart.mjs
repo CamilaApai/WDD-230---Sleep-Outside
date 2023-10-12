@@ -14,6 +14,7 @@ function cartItemTemplate(item) {
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
   <p class="cart-card__quantity">qty: 1</p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
+  <span class="remove-item" data-id="${item.Id}">X</span>
 </li>`;
 
   return newItem;
@@ -41,4 +42,14 @@ export default class ShoppingCart {
     document.querySelector(this.parentSelector).innerHTML = htmlItems.join("");
     document.querySelector(".cart-total").innerText += ` $${this.total}`;
   }
+  getCartItems() {
+    const cartContents = JSON.parse(localStorage.getItem(this.key)) || [];
+    return cartContents;
+  }
+   
+  updateCart(newCartItems) {
+    localStorage.setItem(this.key, JSON.stringify(newCartItems));
+  }
 }
+
+

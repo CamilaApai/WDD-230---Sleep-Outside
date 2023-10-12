@@ -54,11 +54,38 @@ export async function loadTemplate(path) {
 }
 
 export async function loadHeaderFooter() {
-  const headerTemplate = await loadTemplate("../public/partials/header.html");
-  const footerTemplate = await loadTemplate("../public/partials/footer.html");
+  const headerTemplate = await loadTemplate("/partials/header.html");
+  const footerTemplate = await loadTemplate("/partials/footer.html");
   const headerElement = document.getElementById("main-header");
   const footerElement = document.getElementById("main-footer");
 
   renderWithTemplate(headerTemplate, headerElement)
   renderWithTemplate(footerTemplate, footerElement)
+
+  updateCountDisplay();
+}
+
+export function updateCountDisplay() {
+  let amountInCart = getLocalStorage("so-cart").length;
+  document.getElementById("cart-count").textContent = amountInCart > 0 ? amountInCart : 0;
+}
+
+export function alertMessage(message, scroll = true) {
+  const alert = document.createElement("div");
+  alert.classList.add("alert");
+  alert.innerHTML = `<p>${message}</p><span>X</span>`;
+
+  alert.addEventListener("click", function (e) {
+    if (e.target.tagName == "SPAN") {
+      main.removeChild(this);
+    }
+  });
+  const main = document.querySelector("main");
+  main.prepend(alert);
+  if (scroll) window.scrollTo(0, 0);
+}
+
+export function removeAllAlerts() {
+  const alerts = document.querySelectorAll(".alert");
+  alerts.forEach((alert) => document.querySelector("main").removeChild(alert));
 }
