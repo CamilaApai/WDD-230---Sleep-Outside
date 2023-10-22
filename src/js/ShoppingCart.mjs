@@ -26,44 +26,43 @@ export default class ShoppingCart {
     this.parentSelector = parentSelector;
     this.total = 0;
   }
+  
   async init() {
-    const list = getLocalStorage(this.key);
-    this.calculateListTotal(list);
-    this.renderCartContents(list);
+    this.renderCartContents();
   }
-  calculateListTotal(list) {
-    const amounts = list.map((item) => item.FinalPrice);
-    this.total = amounts.reduce((sum, item) => sum + item);
-  }
-
+  
   renderCartContents() {
     const cartItems = getLocalStorage(this.key);
     const htmlItems = cartItems.map((item) => cartItemTemplate(item));
     document.querySelector(this.parentSelector).innerHTML = htmlItems.join("");
+    this.total = cartItems.reduce((total, item) => total + item.TotalPrice, 0);
+    this.updateTotalDisplay(this.total);
   
     const quantityInputs = document.querySelectorAll(".quantity-input");
     quantityInputs.forEach((input) => {
       input.addEventListener("change", (event) => {
         const itemId = event.target.getAttribute("data-id");
         const newQuantity = parseInt(event.target.value);
- 
+  
         const updatedCartItems = cartItems.map((item) => {
           if (item.Id === itemId) {
             item.Quantity = newQuantity;
-            item.TotalPrice = item.FinalPrice * newQuantity; 
-            const totalElement = document.querySelector(".list-total");
-            totalElement.innerHTML = `Total:  $${item.TotalPrice.toFixed(2)} `;
+            item.TotalPrice = item.FinalPrice * newQuantity;
           }
           return item;
         });
   
+        this.total = updatedCartItems.reduce((total, item) => total + item.TotalPrice, 0);
+        this.updateTotalDisplay(this.total);
         this.updateCart(updatedCartItems);
-        this.calculateListTotal(updatedCartItems);
-        this.renderCartContents(updatedCartItems);
+        this.renderCartContents();
       });
     });
+  }
   
-
+  updateTotalDisplay(total) {
+    const totalElement = document.querySelector(".list-total");
+    totalElement.innerHTML = `Total: $${total.toFixed(2)}`;
   }
   
   getCartItems() {
