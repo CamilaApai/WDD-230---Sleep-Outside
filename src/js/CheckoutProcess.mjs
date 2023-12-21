@@ -14,14 +14,12 @@ function formDataToJSON(formElement) {
 }
 
 function packageItems(items) {
-  const simplifiedItems = items.map((item) => {
-    return {
+  const simplifiedItems = items.map((item) => ({
       id: item.Id,
       price: item.FinalPrice,
       name: item.Name,
       quantity: 1,
-    };
-  });
+    }));
   return simplifiedItems;
 }
 
@@ -48,7 +46,7 @@ export default class CheckoutProcess {
       const numItems = document.getElementById("num-items");
 
       numItems.innerText = this.list.length;
-      const amount = this.list.map((item) => item.FinalPrice );
+      const amount = this.list.map((item) => item.FinalPrice);
       this.itemTotal = amount.reduce((total, item) => total + item);
       cartTotal.innerText = "$" + this.itemTotal;
   }
@@ -89,11 +87,9 @@ export default class CheckoutProcess {
     json.tax = this.tax;
     json.shipping = this.shipping;
     json.items = packageItems(this.list);
-    console.log(json);
     try {
       const res = await services.checkout(json);
-      console.log(res);
-      setLocalStorage("so-cart", []);
+      setLocalStorage("so-cart", [res]); //not sure if res here is correct
       location.assign("/checkout/success.html");
     } catch (err) {
       // get rid of any preexisting alerts.
@@ -101,8 +97,6 @@ export default class CheckoutProcess {
       for (let message in err.message) {
         alertMessage(err.message[message]);
       }
-
-      console.log(err);
     }
   }
 }

@@ -6,7 +6,7 @@ async function convertToJson(res) {
 }
 
 export default class ExternalServices {
-  constructor(category) {
+  constructor() {
 
   }
   async getData(category) {
