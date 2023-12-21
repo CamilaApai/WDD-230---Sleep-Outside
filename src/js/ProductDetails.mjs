@@ -14,7 +14,7 @@ export default class ProductDetails {
     // Notice the .bind(this). Our callback will not work if we don't include that line. Review the readings from this week on 'this' to understand why.
     this.product = await this.dataSource.findProductById(this.productId);
     this.renderProductDetails(this.product)
-    document.getElementById('addToCart').addEventListener('click', this.addToCart.bind(this));
+    document.getElementById("addToCart").addEventListener("click", this.addToCart.bind(this));
   }
 
   addToCart() {
@@ -34,13 +34,13 @@ export default class ProductDetails {
     document.querySelector(".divider").innerHTML = "";
     document.querySelector(".divider").innerHTML = productTemplate(data);
 
-    document.getElementById('colorSelector').addEventListener('change', () => updateProductImage(data));
+    document.getElementById("colorSelector").addEventListener("change", () => updateProductImage(data));
   }
 }
 
 function updateProductImage(data) {
-  const selectedColorData = data.Colors.find(color => color.ColorName === document.getElementById('colorSelector').value);
-  const productImage = document.querySelector('.divider img');
+  const selectedColorData = data.Colors.find(color => color.ColorName === document.getElementById("colorSelector").value);
+  const productImage = document.querySelector(".divider img");
   productImage.src = selectedColorData.ColorPreviewImageSrc;
 }
 
@@ -55,7 +55,7 @@ function productTemplate(data) {
     
     <label for="colorSelector">Select Color:</label>
     <select id="colorSelector" class="product__color">
-      ${colorOptions.join('')}
+      ${colorOptions.join("")}
     </select>
     
     <p class="product__description">
