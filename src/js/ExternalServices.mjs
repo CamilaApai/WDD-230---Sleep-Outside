@@ -1,5 +1,4 @@
-const baseURL = import.meta.env.VITE_SERVER_URL
-
+import { VITE_SERVER_URL as baseURL } from "../../vite.config.js"; 
 async function convertToJson(res) {
   const data = await res.json();
   return res.ok ? data : { name: "servicesError", message: data };

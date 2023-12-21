@@ -66,6 +66,9 @@ export async function loadHeaderFooter() {
 }
 
 export function updateCountDisplay() {
+  if (!getLocalStorage("so-cart")) {
+    setLocalStorage("so-cart", []);
+  }
   let amountInCart = getLocalStorage("so-cart").length;
   document.getElementById("cart-count").textContent = amountInCart > 0 ? amountInCart : 0;
 }
