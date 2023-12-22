@@ -1,4 +1,5 @@
-import { VITE_SERVER_URL as baseURL } from "../../vite.config.js"; 
+// import { VITE_SERVER_URL as baseURL } from "../../vite.config.js"; 
+const baseURL = "http://server-nodejs.cit.byui.edu:3000/";
 async function convertToJson(res) {
   const data = await res.json();
   return res.ok ? data : { name: "servicesError", message: data };
