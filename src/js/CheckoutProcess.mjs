@@ -79,24 +79,33 @@ export default class CheckoutProcess {
   
   async checkout() {
     const formElement = document.forms["checkout"];
-
+  
     const json = formDataToJSON(formElement);
-    // add totals, and item details
     json.orderDate = new Date();
     json.orderTotal = this.orderTotal;
     json.tax = this.tax;
     json.shipping = this.shipping;
     json.items = packageItems(this.list);
+    setLocalStorage("so-cart", []);
+    location.assign("/src/checkout/success.html");
+    /*
     try {
       const res = await services.checkout(json);
-      setLocalStorage("so-cart", [res]); //not sure if res here is correct
-      location.assign("/checkout/success.html");
-    } catch (err) {
-      // get rid of any preexisting alerts.
-      removeAllAlerts();
-      for (let message in err.message) {
-        alertMessage(err.message[message]);
+      
+      if (res && res.success) {
+        setLocalStorage("so-cart", []);
+        location.assign("/src/checkout/success.html");
+      } else {
+        removeAllAlerts();
+        for (let message in res.errorMessages) {
+          alertMessage(res.errorMessages[message]);
+        }
       }
+    } catch (err) {
+      removeAllAlerts();
+      alertMessage("An error occurred during checkout. Please try again later.");
     }
+    */
   }
+  
 }
